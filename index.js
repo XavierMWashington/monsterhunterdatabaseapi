@@ -17,6 +17,9 @@ let $ = ''
 let url = ''
 
 global.gatheredNames = []
+global.timeoutID = setTimeout(() => {
+    return "Still working..."
+})
 
 // app.set('views',  path.join(__dirname, "myviews"))
 app.set('view engine', 'ejs')
@@ -82,7 +85,8 @@ const userRouter3u = require('./routes/mh3u')
 const userRouter4u = require('./routes/mh4u')
 const userRouterGu = require('./routes/mhgu')
 const userRouterWi = require('./routes/mhwi')
-const userRouterRs = require('./routes/mhrs')
+const userRouterRs = require('./routes/mhrs');
+const res = require('express/lib/response');
 
 app.use("/mh", userRouterU)
 app.use("/mhfu", userRouterFu)

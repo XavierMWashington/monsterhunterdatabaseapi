@@ -79,7 +79,7 @@ router.get('/smallmonsters', async (req, res) => {
         .then( () => scrapper.getFurtherInfo(monsters))
         .catch((err) => console.log(err))
 
-    res.status(200).send("working...")
+    res.send(timeoutID)
     res.json(monsters)
     console.log("DING!! :D")
     
