@@ -18,6 +18,7 @@ let url = ''
 
 global.gatheredNames = []
 global.timeoutID = setTimeout(() => {
+    console.log("Reached")
     return "Still working..."
 })
 
