@@ -1,4 +1,4 @@
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 const express = require('express') //serverside essential
 const axios = require('axios') //allows for immediate html interactiot
@@ -22,56 +22,57 @@ global.gatheredNames = []
 app.set('view engine', 'ejs')
 
 
-app.get('/', async (req, res) => {
+app.get('/',(req, res) => {
 
-    await Promise.all(alphabet.map(index => axios.get(`https://monsterhunter.fandom.com/wiki/Category:Monsters?from=${index}`)
-        .then((responses) => {
-            //console.log("First then")
+    // await Promise.all(alphabet.map(index => axios.get(`https://monsterhunter.fandom.com/wiki/Category:Monsters?from=${index}`)
+    //     .then((responses) => {
+    //         //console.log("First then")
 
-            html = responses.data
-            $ = cheerio.load(html)
+    //         html = responses.data
+    //         $ = cheerio.load(html)
 
-            $('.category-page__member-link', html).each(function() {
-                const name = $(this).text().trim()
-                url = 'https://monsterhunter.fandom.com' + $(this).attr('href')
+    //         $('.category-page__member-link', html).each(function() {
+    //             const name = $(this).text().trim()
+    //             url = 'https://monsterhunter.fandom.com' + $(this).attr('href')
 
-                monsters.push({
-                    name, 
-                    url
-                })
+    //             monsters.push({
+    //                 name, 
+    //                 url
+    //             })
 
-            })
-            //res.json(monsters)
-        })))
-        .then ( async()  => {
-            console.log("Getting Information")
-             await Promise.all(monsters.map(monster => axios.get(monster.url)
-                .then(response => {
-                    //console.log(monster)
-                    //console.log(monster.url)
-                    //count++
+    //         })
+    //         //res.json(monsters)
+    //     })))
+    //     .then ( async()  => {
+    //         console.log("Getting Information")
+    //          await Promise.all(monsters.map(monster => axios.get(monster.url)
+    //             .then(response => {
+    //                 //console.log(monster)
+    //                 //console.log(monster.url)
+    //                 //count++
     
-                    html = response.data
-                    $ =  cheerio.load(html)                
+    //                 html = response.data
+    //                 $ =  cheerio.load(html)                
     
-                    $('section div:contains("English Title")', html).each(function (){
-                        //console.log($(this).text().trim())
-                        englishTitle = $(this).text().trim()
-                        monster["englishTitle"] = englishTitle
-                        //console.log(monsters[monster])
-                        //console.log(count)
+    //                 $('section div:contains("English Title")', html).each(function (){
+    //                     //console.log($(this).text().trim())
+    //                     englishTitle = $(this).text().trim()
+    //                     monster["englishTitle"] = englishTitle
+    //                     //console.log(monsters[monster])
+    //                     //console.log(count)
     
-                        //monsters[index]["englishTitle"] = englishTitle
-                    })
+    //                     //monsters[index]["englishTitle"] = englishTitle
+    //                 })
     
-                })))
-        })
-        .catch((err) => console.log(err))
+    //             })))
+    //     })
+    //     .catch((err) => console.log(err))
 
 
 
-    res.json(monsters)
-    console.log("DING!!! :D")
+    //res.json(monsters)
+    //console.log("DING!!! :D")
+    res.send("Welcome to the database!")
     
 })
 
