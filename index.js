@@ -20,7 +20,7 @@ global.gatheredNames = []
 global.timeoutID = setTimeout(() => {
     console.log("Reached")
     return "Still working..."
-})
+}, 15000)
 
 // app.set('views',  path.join(__dirname, "myviews"))
 app.set('view engine', 'ejs')
