@@ -2,8 +2,13 @@ const cheerio = require('cheerio') //allows for webscraping
 const splitter = require('./titleFactoring')
 const axios = require('axios') //allows for immediate html interactiot
 
-const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+process.on('message', async message => {
+    await getFurtherInfo(message.monsterArray)
+    process.send(message.monsterArray)
+    process.exit()
+})
 
+const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
 let englishTitle = '' 
 let className = ''
@@ -22,6 +27,8 @@ async function getFurtherInfo(monsterArray){
     console.log("Getting Information")
      await Promise.all(monsterArray.map(monster => axios.get(monster.url)
         .then(response => {
+
+            console.log("Beginning deeper fetching")
 
             const html = response.data
             const $ =  cheerio.load(html)    

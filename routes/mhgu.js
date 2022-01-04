@@ -1,124 +1,31 @@
 const express = require('express')
 const router = express.Router()
-const axios = require('axios') //allows for immediate html interaction
-const cheerio = require('cheerio') //allows for webscraping
-const scrapper = require('../jsfiles/scrappingFunctions')
+const bootScraper = require('../jsfiles/bootstrapScraper')
+const { fork } = require('child_process')
 
 const monsters = []
 
-
-let html = ''
-let $ = ''
-let url = ''
-
-//let imageUrl = ''
-
-
 router.get('/', async (req, res) => {
-
-    await axios.get('https://monsterhunter.fandom.com/wiki/MHGU:_Monsters')
-        .then((responses) => {
-
-            //---load all monsters---
-
-            html = responses.data
-            $ = cheerio.load(html)
-
-            $('tbody tr td a ', html).each(function() {
-                const name = $(this).text().trim()
-                url = 'https://monsterhunter.fandom.com' + $(this).attr('href')
-                if(!gatheredNames.includes(name) && gatheredNames.length > 0){               
-                     monsters.push({
-                        name, 
-                        url//,
-                        //imageUrl
-                    })
-                }
-            
-                //imageUrl = $(this).find('img').attr('data-src')
-                gatheredNames.push(name)
-
-            })
-
-        })
-        .then( () => scrapper.getFurtherInfo(monsters))
-        .catch((err) => console.log(err))
-
+    await bootScraper.scraper("MHGU:_Monsters", monsters, "Felyne")
+    await bootScraper.scraper("MHGU:_Monsters", monsters, "Ukanlos")
     res.json(monsters)
-    console.log("DING!! :D")
+    console.log("DING!! :D")  
     
 })
 
 router.get('/smallmonsters', async (req, res) => {
 
-    await axios.get('https://monsterhunter.fandom.com/wiki/MHGU:_Monsters')
-        .then((responses) => {
-
-            //---load small monsters---
-
-            html = responses.data
-            $ = cheerio.load(html)
-
-            $('tbody:contains("Felyne") tr td a ', html).each(function() {
-                const name = $(this).text().trim()
-                url = 'https://monsterhunter.fandom.com' + $(this).attr('href')
-                if(!gatheredNames.includes(name) && gatheredNames.length > 0){               
-                     monsters.push({
-                        name, 
-                        url//,
-                        //imageUrl
-                    })
-                }
-
-                //imageUrl = $(this).find('img').attr('data-src')
-                gatheredNames.push(name)
-
-            })
-
-        })
-        .then( () => scrapper.getFurtherInfo(monsters))
-        .catch((err) => console.log(err))
-
+    await bootScraper.scraper("MHGU:_Monsters", monsters, "Felyne")
     res.json(monsters)
-    console.log("DING!! :D")
-    
+    console.log("DING!! :D")  
 })
 
 router.get('/largemonsters', async (req, res) => {
 
-    await axios.get('https://monsterhunter.fandom.com/wiki/MHGU:_Monsters')
-        .then((responses) => {
-
-            //---load large monsters---
-
-            html = responses.data
-            $ = cheerio.load(html)
-
-            $('tbody:contains("Ukanlos") tr td a ', html).each(function() {
-                const name = $(this).text().trim()
-                url = 'https://monsterhunter.fandom.com' + $(this).attr('href')
-                if(!gatheredNames.includes(name) && gatheredNames.length > 0){               
-                     monsters.push({
-                        name, 
-                        url//,
-                        //imageUrl
-                    })
-                }
-
-                //imageUrl = $(this).find('img').attr('data-src')
-                gatheredNames.push(name)
-
-            })
-        })
-        .then( () => scrapper.getFurtherInfo(monsters))
-        .catch((err) => console.log(err))
-
-
-
+    await bootScraper.scraper("MHGU:_Monsters", monsters, "Ukanlos")
     res.json(monsters)
     console.log("DING!! :D")
     
 })
 
 module.exports = router
-
