@@ -4,7 +4,7 @@ const axios = require('axios') //allows for immediate html interactiot
 const res = require('express/lib/response')
 
 process.on('message', async message => {
-    await getFurtherInfo(message.monsterArray, message.clientResponse)
+    await getFurtherInfo(message.monsterArray)
     process.send(message.monsterArray)
     process.exit()
 })
@@ -24,13 +24,13 @@ let physiologyReached = false
 let abilitiesReached = false
 let behaviorReached = false
 
-async function getFurtherInfo(monsterArray, clientResponse){
+async function getFurtherInfo(monsterArray){
     console.log("Getting Information")
      await Promise.all(monsterArray.map(monster => axios.get(monster.url)
         .then(response => {
 
             console.log("Beginning deeper fetching")
-            res.write("")
+            res.write(" ")
 
             const html = response.data
             const $ =  cheerio.load(html)    

@@ -21,13 +21,13 @@ router.get('/smallmonsters', async (req, res) => {
     await bootScraper.scraper("First Generation", monsters, "Velociprey")
 
     const childProcess = fork('./jsfiles/generalScrapingFunctions')
-    childProcess.send({"monsterArray": monsters, "clientResponse": res})
+    childProcess.send({"monsterArray": monsters})
     childProcess.on("message", message => {
         res.write(JSON.stringify(message))
-        res.end(message)
+        console.log("Ding!")
+        res.end()
     })
 
-    console.log("DING!! :D")  
     res.write("Loading Content")
 })
 
