@@ -30,7 +30,7 @@ async function getFurtherInfo(monsterArray){
         .then(response => {
 
             console.log("Beginning deeper fetching")
-            res.write(" ")
+            res.write("")
 
             const html = response.data
             const $ =  cheerio.load(html)    

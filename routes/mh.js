@@ -28,7 +28,7 @@ router.get('/smallmonsters', async (req, res) => {
         res.end()
     })
 
-    res.write("Loading Content")
+    //res.write("Loading Content")
 })
 
 router.get('/largemonsters', async (req, res) => {
