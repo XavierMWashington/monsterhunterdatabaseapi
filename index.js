@@ -5,6 +5,7 @@ const express = require('express') //serverside essential
 const app = express()
 
 global.gatheredNames = []
+global.activated = false
 
 app.set('view engine', 'ejs')
 

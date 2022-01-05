@@ -29,7 +29,7 @@ async function getFurtherInfo(monsterArray){
      await Promise.all(monsterArray.map(monster => axios.get(monster.url)
         .then(response => {
 
-            console.log("Beginning deeper fetching")
+            //console.log("Beginning deeper fetching")
             res.write(" ")
 
             const html = response.data

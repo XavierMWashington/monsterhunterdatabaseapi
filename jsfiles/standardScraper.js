@@ -26,7 +26,7 @@ const scraper = async function(urlSlug, monsterArray, galleryIndex){
 
         })
     })
-    .then( () => generalScraper.getFurtherInfo(monsterArray))
+    //.then( () => generalScraper.getFurtherInfo(monsterArray))
     .catch((err) => console.log(err))
 }
 
