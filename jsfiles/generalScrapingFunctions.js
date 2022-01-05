@@ -28,7 +28,7 @@ let behaviorReached = false
 async function getFurtherInfo(monsterArray){
 
     const monsterCount = monsterArray.length
-    let iter = gatheredNames.length
+    let iter = 0
 
     console.log("Getting Information")
      await Promise.all(monsterArray.map(monster => axios.get(monster.url)
@@ -214,7 +214,7 @@ async function getFurtherInfo(monsterArray){
 
             iter++ 
             console.log("Monster number " + iter + "/" + monsterCount + " has been loaded")
-            
+
         })))
 
 
