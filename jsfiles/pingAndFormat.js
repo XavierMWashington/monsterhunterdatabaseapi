@@ -11,7 +11,6 @@ formatAndMessenger = function(monsterArray, response){
     setInterval(() => {
         if(activated) {
             response.write(',"placeholderPingData": "delete this object after download"')
-            console.log("Metro")
         }
         // metronome = 10000
     }, 5000)

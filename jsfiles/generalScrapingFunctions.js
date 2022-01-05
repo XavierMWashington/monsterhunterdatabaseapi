@@ -24,13 +24,20 @@ let physiologyReached = false
 let abilitiesReached = false
 let behaviorReached = false
 
+
 async function getFurtherInfo(monsterArray){
+
+    const monsterCount = monsterArray.length
+    let iter = 0
+
     console.log("Getting Information")
      await Promise.all(monsterArray.map(monster => axios.get(monster.url)
         .then(response => {
 
-            //console.log("Beginning deeper fetching")
-            res.write(" ")
+            iter++ 
+
+            console.log("Monster number " + iter + "/" + monsterCount + " has been loaded")
+            
 
             const html = response.data
             const $ =  cheerio.load(html)    
