@@ -8,23 +8,18 @@ const monsters = []
 router.get('/', async (req, res) => {
     await bootScraper.scraper("MHGU:_Monsters", monsters, "Felyne")
     await bootScraper.scraper("MHGU:_Monsters", monsters, "Ukanlos")
-    res.json(monsters)
-    console.log("DING!! :D")  
+    formatAndMessenger(monsters, res)
     
 })
 
 router.get('/smallmonsters', async (req, res) => {
 
     await bootScraper.scraper("MHGU:_Monsters", monsters, "Felyne")
-    res.json(monsters)
-    console.log("DING!! :D")  
 })
 
 router.get('/largemonsters', async (req, res) => {
 
     await bootScraper.scraper("MHGU:_Monsters", monsters, "Ukanlos")
-    res.json(monsters)
-    console.log("DING!! :D")
     
 })
 

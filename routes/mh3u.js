@@ -10,82 +10,20 @@ router.get('/', async (req, res) => {
 
     await standardScraper.scraper("MH3U:_Monsters", monsters, "0")
     await standardScraper.scraper("MH3U:_Monsters", monsters, "1")
-
-    
-    let activated = true
-
-    res.write('[{"placeholderPingData": "delete this object after download"')
-    setInterval(() => {
-        if(activated) {
-            res.write(',"placeholderPingData": "delete this object after download"')
-            console.log("Metro")
-        }
-        // metronome = 10000
-    }, 5000)
-
-    const childProcess = fork('./jsfiles/generalScrapingFunctions')
-    childProcess.send({"monsterArray": monsters})
-    childProcess.on("message", message => {
-        res.write("},")
-        res.write(JSON.stringify(message).substring(1))
-        activated = false
-        console.log("Ding!")
-        res.end()
-    })
+    formatAndMessenger(monsters, res)
     
 })
 
 router.get('/smallmonsters', async (req, res) => {
 
     await standardScraper.scraper("MH3U:_Monsters", monsters, "0")
-
-    let activated = true
-
-    res.write('[{"placeholderPingData": "delete this object after download"')
-    setInterval(() => {
-        if(activated) {
-            res.write(',"placeholderPingData": "delete this object after download"')
-            console.log("Metro")
-        }
-        // metronome = 10000
-    }, 5000)
-
-    const childProcess = fork('./jsfiles/generalScrapingFunctions')
-    childProcess.send({"monsterArray": monsters})
-    childProcess.on("message", message => {
-        res.write("},")
-        res.write(JSON.stringify(message).substring(1))
-        activated = false
-        console.log("Ding!")
-        res.end()
-    })
-    
+    formatAndMessenger(monsters, res)    
 })
 
 router.get('/largemonsters', async (req, res) => {
 
     await standardScraper.scraper("MH3U:_Monsters", monsters, "1")
-
-    let activated = true
-
-    res.write('[{"placeholderPingData": "delete this object after download"')
-    setInterval(() => {
-        if(activated) {
-            res.write(',"placeholderPingData": "delete this object after download"')
-            console.log("Metro")
-        }
-        // metronome = 10000
-    }, 5000)
-
-    const childProcess = fork('./jsfiles/generalScrapingFunctions')
-    childProcess.send({"monsterArray": monsters})
-    childProcess.on("message", message => {
-        res.write("},")
-        res.write(JSON.stringify(message).substring(1))
-        activated = false
-        console.log("Ding!")
-        res.end()
-    })
+    formatAndMessenger(monsters, res)
 })
 
 module.exports = router
