@@ -1,13 +1,20 @@
 const cheerio = require('cheerio') //allows for webscraping
 const splitter = require('./titleFactoring')
 const axios = require('axios') //allows for immediate html interactiot
-const res = require('express/lib/response')
+const redis = require('redis')
+
 
 process.on('message', async message => {
     await getFurtherInfo(message.monsterArray)
     process.send(message.monsterArray)
     process.exit()
 })
+
+let redisClient = redis.createClient()
+//let cachedMonsters = []
+
+//redisClient = redis.createClient()
+
 
 const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
@@ -24,20 +31,81 @@ let physiologyReached = false
 let abilitiesReached = false
 let behaviorReached = false
 
+function transferObjectData(transferee, object){
+    transferee = object
+    transferee["Englishtitles"] = object.englishTitles
+    transferee["className"] = object.className
+    transferee["elements"] = object.elements
+    transferee["ailments"] = object.ailments
+    transferee["weaknessses"] = object.weaknesses
+    transferee["habitats"] = object.habitats
+    transferee["size"] = object.size
+    transferee["generation"] = object.generation
+    transferee["physiology"] = object.physiology
+    transferee["abilities"] = object.abilities
+    transferee["behavior"] = object.behavior
+
+}
+
 
 async function getFurtherInfo(monsterArray){
 
     const monsterCount = monsterArray.length
     let iter = 0
 
+    redisClient.connect()
+
+    let cachedMonsters = []
+
+    cachedMonsters = await redisClient.get("loadedMonsters", (error, loadedMonsters) => {})
+    
+    cachedMonsters = JSON.parse(cachedMonsters)
+
+    //console.log(cachedMonsters)
+    
+
+
     console.log("Getting Information")
      await Promise.all(monsterArray.map(monster => axios.get(monster.url)
         .then(response => {
 
+            // monster["englishTitles"] = null
+            // monster["className"] = null
+            // monster["elements"] = null
+            // monster["ailments"] = null
+            // monster["weaknesses"] = null
+            // monster["habitats"] = null
+            // monster["size"] = null
+            // monster["generation"] = null
+            // monster["physiology"] = null
+            // monster["abilities"] = null
+            // monster["behavior"] = null
+
             
 
+            try{
+                for( i = 0; i < cachedMonsters.length; i++){
+                    if(cachedMonsters[i].url ==  monster.url){
+                        //monster = cachedMonsters[i]
+                        //console.log(cachedMonsters[i])
+                        //transferObjectData(monster, cachedMonsters[i])
+                        // monster = JSON.stringify(cachedMonsters[i])
+                        // monster = JSON.parse(monster)
+                        monster = Object.assign(monster, cachedMonsters[i])
+                        console.log("Cached monster (" + cachedMonsters[i].name + ") loaded")
+                        iter++
+                        return 
+                    }
+                }
+            } catch (TypeError){
+
+            }
+
             const html = response.data
-            const $ =  cheerio.load(html)    
+            const $ =  cheerio.load(html)
+
+            //console.log(monster["englishTitles"])
+            
 
             //**********/
             //Obtain the titles
@@ -214,9 +282,11 @@ async function getFurtherInfo(monsterArray){
 
             iter++ 
             console.log("Monster number " + iter + "/" + monsterCount + " has been loaded")
+            //redisClient.set("loadedMonsters", monsterArray)
 
         })))
 
+    redisClient.set("loadedMonsters", JSON.stringify(monsterArray))
 
 }
 
