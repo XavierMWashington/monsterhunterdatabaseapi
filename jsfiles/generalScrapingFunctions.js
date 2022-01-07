@@ -10,8 +10,8 @@ process.on('message', async message => {
     process.exit()
 })
 
-let redisEnvironment = process.env.REDIS_URL || 8000
-console.log("Reddis runnong on this url: " + redisEnvironment)
+let redisURL = url.parse(process.env.REDIS_URL) || 8000
+console.log("Reddis running on this url: " + redisURL)
 
 let redisClient = redis.createClient(redisEnvironment)
 //let cachedMonsters = []
