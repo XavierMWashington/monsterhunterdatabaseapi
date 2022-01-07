@@ -9,6 +9,18 @@ const app = express()
 global.gatheredNames = []
 global.activated = false
 
+const redis = require('redis')
+const url = require("url-parse")
+
+let redisClient
+if(process.env.REDISCLOUD_URL){
+    let redisURL = url(process.env.REDISCLOUD_URL);
+    redisClient = redis.createClient(redisURL)
+    redisClient.connect()
+    console.log("Redis is connected to heroku")
+} else {
+    redisClient = redis.createClient()
+}
 
 //console.log(global.redisClient)
 //console.log(typeof redisClient)
