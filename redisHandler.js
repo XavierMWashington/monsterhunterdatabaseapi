@@ -2,8 +2,8 @@ const redis = require('redis')
 const url = require("url-parse")
 
 let redisClient
-if(process.env.REDIS_URL){
-    let redisURL = url(process.env.REDIS_URL);
+if(process.env.REDIS_TLS_URL){
+    let redisURL = url(process.env.REDIS_TLS_URL);
     redisClient = redis.createClient(redisURL)
     redisClient.connect()
     console.log("Redis is connected to heroku")
