@@ -1,4 +1,4 @@
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8080;
 
 const express = require('express') //serverside essential
 
@@ -32,7 +32,8 @@ app.use("/mhwi", userRouterWi)
 app.use("/mhrs", userRouterRs)
 
 
-app.listen(PORT, '0.0.0.0',() => {
-    console.log(`Server running on port ${PORT}`)
-})
+// app.listen(PORT,() => {
+//     console.log(`Server running on port ${PORT}`)
+// })
 
+app.listen(80)
