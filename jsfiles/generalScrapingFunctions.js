@@ -6,12 +6,12 @@ const redis = require('redis')
 
 process.on('message', async message => {
     await getFurtherInfo(message.monsterArray)
-    console.log("Reddis runnong on this url: " + redisEnvironment)
     process.send(message.monsterArray)
     process.exit()
 })
 
 let redisEnvironment = process.env.REDIS_URL || 8000
+console.log("Reddis runnong on this url: " + redisEnvironment)
 
 let redisClient = redis.createClient(redisEnvironment)
 //let cachedMonsters = []
