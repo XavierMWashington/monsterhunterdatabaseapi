@@ -6,7 +6,7 @@ if(process.env.REDIS_TLS_URL){
     let redisURL = url(process.env.REDIS_TLS_URL);
     redisClient = redis.createClient(redisURL)
     redisClient.connect()
-    console.log("Redis is connected to heroku")
+    console.log("Redis is connected to heroku\nurl:" + redisURL)
 } else {
     redisClient = redis.createClient()
 }
