@@ -13,14 +13,17 @@ const redis = require('redis')
 const url = require("url-parse")
 
 let redisClient
-if(process.env.REDISCLOUD_URL){
-    let redisURL = url(process.env.REDISCLOUD_URL);
-    redisClient = redis.createClient(redisURL)
-    redisClient.connect().catch(err => console.log(err))
-    console.log("Redis is connected to heroku")
-} else {
-    redisClient = redis.createClient()
-    console.log("Heroku connection attempt failed \nUsing localhost")
+
+redisConnect = async function(){
+    if(process.env.REDISCLOUD_URL){
+        let redisURL = url(process.env.REDISCLOUD_URL);
+        redisClient = await redis.createClient(redisURL)
+        redisClient.connect().catch(err => console.log(err))
+        console.log("Redis is connected to heroku")
+    } else {
+        redisClient = redis.createClient()
+        console.log("Heroku connection attempt failed \nUsing localhost")
+    }
 }
 
 //console.log(global.redisClient)
