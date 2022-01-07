@@ -12,14 +12,15 @@ global.activated = false
 const redis = require('redis')
 const url = require("url-parse")
 
-const redisURL = new url(process.env.REDISCLOUD_URL, {no_ready_check: true}) || 8000
-console.log("Reddis running on this url: " + redisURL)
+let redisClient
+if(process.env.REDISCLOUD_URL){
+    let redisURL = url.parse(process.env.REDISCLOUD_URL);
+    redisClient = redis.createClient(redisURL)
+    console.log("Redis is connected to heroku")
+} else {
+    redisClient = redis.createClient()
+}
 
-const redisClient = redis.createClient(redisURL)
-
-console.log("This part of the code has been reached")
-
-redisClient.connect()
 
 //console.log(global.redisClient)
 //console.log(typeof redisClient)
