@@ -20,6 +20,7 @@ if(process.env.REDISCLOUD_URL){
     console.log("Redis is connected to heroku")
 } else {
     redisClient = redis.createClient()
+    console.log("Heroku connection attempt failed \nUsing localhost")
 }
 
 //console.log(global.redisClient)
