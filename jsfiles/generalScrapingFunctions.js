@@ -11,7 +11,7 @@ process.on('message', async message => {
     process.exit()
 })
 
-let redisURL = new url(process.env.REDIS_PROVIDER) || 8000
+let redisURL = new url(process.env.REDISCLOUD_URL, {no_ready_check: true}) || 8000
 console.log("Reddis running on this url: " + redisURL)
 
 let redisClient = redis.createClient(redisURL)
