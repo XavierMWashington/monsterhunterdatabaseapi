@@ -1,4 +1,4 @@
-const PORT = jioanreisgnuisgngjnrel//process.env.PORT || 8000;
+const PORT = "jioanreisgnuisgngjnrel" //process.env.PORT || 8000;
 
 const express = require('express') //serverside essential
 
