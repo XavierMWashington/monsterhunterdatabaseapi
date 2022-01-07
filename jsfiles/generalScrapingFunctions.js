@@ -291,7 +291,7 @@ async function getFurtherInfo(monsterArray){
 
         })))
 
-    //redisClient.set("loadedMonsters", JSON.stringify(monsterArray))
+    redisClient.set("loadedMonsters", JSON.stringify(monsterArray))
 
 }
 
