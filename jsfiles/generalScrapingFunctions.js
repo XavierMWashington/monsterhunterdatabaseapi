@@ -56,7 +56,7 @@ async function getFurtherInfo(monsterArray){
     const monsterCount = monsterArray.length
     let iter = 0
 
-    redisClient.connect()
+    //redisClient.connect()
 
 
     let cachedMonsters = []
