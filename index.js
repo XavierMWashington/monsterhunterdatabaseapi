@@ -8,6 +8,7 @@ const app = express()
 
 global.gatheredNames = []
 global.activated = false
+global.redisLoaded = false
 
 const redis = require('redis')
 const url = require("url-parse")
@@ -25,6 +26,8 @@ redisConnect = async function(){
         console.log("Heroku connection attempt failed \nUsing localhost")
     }
 }
+
+redisConnect()
 
 //console.log(global.redisClient)
 //console.log(typeof redisClient)
