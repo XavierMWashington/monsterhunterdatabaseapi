@@ -7,6 +7,11 @@ const app = express()
 global.gatheredNames = []
 global.activated = false
 
+let redisURL = new url(process.env.REDISCLOUD_URL, {no_ready_check: true}) || 8000
+console.log("Reddis running on this url: " + redisURL)
+
+let redisClient = redis.createClient(redisURL)
+
 app.set('view engine', 'ejs')
 
 app.get('/',(req, res) => {
