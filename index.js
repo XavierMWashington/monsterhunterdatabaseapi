@@ -27,7 +27,7 @@ redisConnect = async function(){
     }
 }
 
-redisConnect()
+//redisConnect()
 
 //console.log(global.redisClient)
 //console.log(typeof redisClient)
