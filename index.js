@@ -7,6 +7,7 @@ const app = express()
 global.gatheredNames = []
 global.activated = false
 
+const redis = require('redis')
 const url = require("url-parse")
 
 let redisURL = new url(process.env.REDISCLOUD_URL, {no_ready_check: true}) || 8000
