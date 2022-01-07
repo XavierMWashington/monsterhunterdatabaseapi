@@ -17,8 +17,9 @@ console.log("Reddis running on this url: " + redisURL)
 
 const redisClient = redis.createClient(redisURL)
 
-redisClient.connect()
+console.log("This part of the code has been reached")
 
+redisClient.connect()
 
 //console.log(global.redisClient)
 //console.log(typeof redisClient)
