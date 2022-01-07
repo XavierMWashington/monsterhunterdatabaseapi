@@ -1,9 +1,7 @@
 const cheerio = require('cheerio') //allows for webscraping
 const splitter = require('./titleFactoring')
 const axios = require('axios') //allows for immediate html interactiot
-const redis = require('redis')
-const url = require("url-parse")
-
+const { redisClient } = require('../redisHandler')
 
 process.on('message', async message => {
     await getFurtherInfo(message.monsterArray)
@@ -11,10 +9,11 @@ process.on('message', async message => {
     process.exit()
 })
 
-let redisURL = new url(process.env.REDISCLOUD_URL, {no_ready_check: true}) || 8000
-console.log("Reddis running on this url: " + redisURL)
 
-let redisClient = redis.createClient(redisURL)
+// let redisURL = new url(process.env.REDISCLOUD_URL, {no_ready_check: true}) || 8000
+// console.log("Reddis running on this url: " + redisURL)
+
+// let redisClient = redis.createClient(redisURL)
 //let cachedMonsters = []
 
 //redisClient = redis.createClient()
@@ -57,7 +56,8 @@ async function getFurtherInfo(monsterArray){
     const monsterCount = monsterArray.length
     let iter = 0
 
-    redisClient.connect()
+    //redisClient.connect()
+
 
     let cachedMonsters = []
 
@@ -72,6 +72,7 @@ async function getFurtherInfo(monsterArray){
     console.log("Getting Information")
      await Promise.all(monsterArray.map(monster => axios.get(monster.url)
         .then(response => {
+
 
             // monster["englishTitles"] = null
             // monster["className"] = null

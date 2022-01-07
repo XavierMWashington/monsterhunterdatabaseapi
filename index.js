@@ -4,16 +4,26 @@ const express = require('express') //serverside essential
 
 const app = express()
 
+
+
 global.gatheredNames = []
 global.activated = false
+
 
 const redis = require('redis')
 const url = require("url-parse")
 
-let redisURL = new url(process.env.REDISCLOUD_URL, {no_ready_check: true}) || 8000
+const redisURL = 8000//new url(process.env.REDISCLOUD_URL, {no_ready_check: true}) || 8000
 console.log("Reddis running on this url: " + redisURL)
 
-let redisClient = redis.createClient(redisURL)
+const redisClient = redis.createClient(redisURL)
+
+redisClient.connect()
+
+
+//console.log(global.redisClient)
+//console.log(typeof redisClient)
+
 
 app.set('view engine', 'ejs')
 

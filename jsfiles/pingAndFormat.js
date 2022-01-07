@@ -5,6 +5,7 @@ const { fork } = require('child_process')
 
 
 formatAndMessenger = function(monsterArray, response){
+
     let activated = true
 
     response.write('[{"placeholderPingData": "delete this object after download"')
