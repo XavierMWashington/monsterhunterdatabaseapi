@@ -2,6 +2,7 @@ const cheerio = require('cheerio') //allows for webscraping
 const splitter = require('./titleFactoring')
 const axios = require('axios') //allows for immediate html interactiot
 const redis = require('redis')
+const url = require("url-parse")
 
 
 process.on('message', async message => {
@@ -10,10 +11,10 @@ process.on('message', async message => {
     process.exit()
 })
 
-let redisURL = url.parse(process.env.REDIS_URL) || 8000
+let redisURL = new url(process.env.REDIS_URL) || 8000
 console.log("Reddis running on this url: " + redisURL)
 
-let redisClient = redis.createClient(redisEnvironment)
+let redisClient = redis.createClient(redisURL)
 //let cachedMonsters = []
 
 //redisClient = redis.createClient()
