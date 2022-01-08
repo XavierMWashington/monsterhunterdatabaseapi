@@ -9,7 +9,7 @@ global.gatheredNames = []
 global.activated = false
 global.redisLoaded = false
 
-//app.set('view engine', 'ejs')
+app.set('view engine', 'ejs')
 
 app.get('/',(req, res) => {
 

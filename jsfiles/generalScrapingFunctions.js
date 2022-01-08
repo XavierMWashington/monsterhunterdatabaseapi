@@ -37,6 +37,12 @@ let behaviorReached = false
 
 async function getFurtherInfo(monsterArray){
 
+
+    redisClient.connect().catch(err => {
+        console.error(err)
+        if(!process.env.REDIS_URL) console.warn("\nDid you remember to start up your redis server?\n\n")
+    })
+    
     const monsterCount = monsterArray.length
     let iter = 0
 

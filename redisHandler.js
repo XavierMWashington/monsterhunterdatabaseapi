@@ -4,14 +4,10 @@ let redisClient
 if(process.env.REDIS_URL){
     let redisURL = process.env.REDIS_URL
     redisClient = redis.createClient({url: redisURL})
-    redisClient.connect().catch(err => console.log(err))
-    console.log("Redis is connected to heroku\nurl:" + redisURL)
+    console.log("Attempting to connect to redis-heroku\nurl:" + redisURL)
 } else {
     redisClient = redis.createClient()
-    redisClient.connect().catch(err => {
-        console.error(err)
-        console.warn("\nDid you remember to start up your redis server?\n\n")
-    })
+    console.log("Attempting to connect to localhost redis")
 }
 
 exports.redisClient = redisClient
