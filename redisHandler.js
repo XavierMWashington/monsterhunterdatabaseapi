@@ -1,5 +1,4 @@
 const redis = require('redis')
-const url = require("url-parse")
 
 let redisClient
 if(process.env.REDIS_URL){
@@ -9,6 +8,7 @@ if(process.env.REDIS_URL){
     console.log("Redis is connected to heroku\nurl:" + redisURL)
 } else {
     redisClient = redis.createClient()
+    redisClient.connect().catch(err => console.error(err))
 }
 
 exports.redisClient = redisClient
