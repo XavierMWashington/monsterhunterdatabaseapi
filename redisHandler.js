@@ -8,7 +8,10 @@ if(process.env.REDIS_URL){
     console.log("Redis is connected to heroku\nurl:" + redisURL)
 } else {
     redisClient = redis.createClient()
-    redisClient.connect().catch(err => console.error(err))
+    redisClient.connect().catch(err => {
+        console.error(err)
+        console.warn("\nDid you remember to start up your redis server?\n\n")
+    })
 }
 
 exports.redisClient = redisClient

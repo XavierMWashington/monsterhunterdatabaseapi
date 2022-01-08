@@ -246,6 +246,7 @@ async function getFurtherInfo(monsterArray){
         }))).catch(err => console.err(err))
 
     redisClient.set("loadedMonsters", JSON.stringify(monsterArray))
+    redisClient.quit()
 
 }
 

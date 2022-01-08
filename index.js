@@ -10,6 +10,7 @@ global.gatheredNames = []
 global.activated = false
 global.redisLoaded = false
 
+const redis = require('redis')
 
 app.set('view engine', 'ejs')
 
