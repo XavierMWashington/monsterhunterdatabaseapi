@@ -10,8 +10,8 @@ if(process.env.REDIS_URL){
     console.log("Attempting to connect to localhost redis")
 }
 
-redis.on ("error", (err) =>
+redisClient.on ("error", (err) =>
    console.log(`Redis error: ${err}`))
-   
+
 
 exports.redisClient = redisClient
