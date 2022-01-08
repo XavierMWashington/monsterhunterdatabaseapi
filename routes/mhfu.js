@@ -8,7 +8,8 @@ const monsters = []
 router.get('/', async (req, res) => {
     await bootScraper.scraper("Second_Generation", monsters, "Felyne")
     await bootScraper.scraper("Second_Generation", monsters, "Ukanlos")
-    
+    formatAndMessenger(monsters, res)
+   
 })
 
 router.get('/smallmonsters', async (req, res) => {

@@ -15,11 +15,15 @@ router.get('/', async (req, res) => {
 router.get('/smallmonsters', async (req, res) => {
 
     await bootScraper.scraper("MHGU:_Monsters", monsters, "Felyne")
+    formatAndMessenger(monsters, res)
+
 })
 
 router.get('/largemonsters', async (req, res) => {
 
     await bootScraper.scraper("MHGU:_Monsters", monsters, "Ukanlos")
+    formatAndMessenger(monsters, res)
+
     
 })
 
