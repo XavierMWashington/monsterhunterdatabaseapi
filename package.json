@@ -4,9 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "devStart": "nodemon index.js",
-    "start": "node index.js"
-  },
+    "dev": "react-scripts start",
+    "start": "serve -s build",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build"
+    },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -17,6 +21,7 @@
     "ejs": "^3.1.6",
     "express": "^4.17.2",
     "redis": "^4.0.1",
+    "serve": "^13.0.2",
     "url": "^0.11.0",
     "url-parse": "^1.5.4"
   },
