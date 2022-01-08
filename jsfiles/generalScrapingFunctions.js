@@ -6,6 +6,7 @@ const { redisClient } = require('../redisHandler')
 process.on('message', async message => {
     await getFurtherInfo(message.monsterArray)
     process.send(message.monsterArray)
+    redisClient.quit()
     process.exit()
 })
 
@@ -246,7 +247,8 @@ async function getFurtherInfo(monsterArray){
         }))).catch(err => console.err(err))
 
     redisClient.set("loadedMonsters", JSON.stringify(monsterArray))
-    redisClient.quit()
+    //redisClient.quit()
+    //process.exit()
 
 }
 

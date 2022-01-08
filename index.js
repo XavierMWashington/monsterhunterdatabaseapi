@@ -5,12 +5,9 @@ const express = require('express') //serverside essential
 const app = express()
 
 
-
 global.gatheredNames = []
 global.activated = false
 global.redisLoaded = false
-
-const redis = require('redis')
 
 app.set('view engine', 'ejs')
 
@@ -27,6 +24,7 @@ const userRouter4u = require('./routes/mh4u')
 const userRouterGu = require('./routes/mhgu')
 const userRouterWi = require('./routes/mhwi')
 const userRouterRs = require('./routes/mhrs');
+const { redisClient } = require('./redisHandler');
 
 app.use("/mh", userRouterU)
 app.use("/mhfu", userRouterFu)
@@ -39,5 +37,11 @@ app.use("/mhrs", userRouterRs)
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
+})
+
+
+process.on('exit', code => {
+    console.log("The app has finished! Closing the Redis Client...")
+    redisClient.quit()
 })
 
