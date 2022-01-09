@@ -17,22 +17,22 @@ app.get('/',(req, res) => {
     
 })
 
-const userRouterU = require('./routes/mh')
-const userRouterFu = require('./routes/mhfu')
-const userRouter3u = require('./routes/mh3u')
-const userRouter4u = require('./routes/mh4u')
-const userRouterGu = require('./routes/mhgu')
-const userRouterWi = require('./routes/mhwi')
-const userRouterRs = require('./routes/mhrs');
+const userRouter1st = require('./routes/mh_first')
+const userRouter2nd = require('./routes/mh_second')
+const userRouter3rd = require('./routes/mh_third')
+const userRouter4th = require('./routes/mh_fourth')
+const userRouter5th = require('./routes/mh_fifth')
+// const userRouterWi = require('./routes/mhwi')
+// const userRouterRs = require('./routes/mhrs');
 const { redisClient } = require('./redisHandler');
 
-app.use("/mh", userRouterU)
-app.use("/mhfu", userRouterFu)
-app.use("/mh3u", userRouter3u)
-app.use("/mh4u", userRouter4u)
-app.use("/mhgu", userRouterGu)
-app.use("/mhwi", userRouterWi)
-app.use("/mhrs", userRouterRs)
+app.use("/mh_first", userRouter1st)
+app.use("/mh_second", userRouter2nd)
+app.use("/mh_third", userRouter3rd)
+app.use("/mh_fourth", userRouter4th)
+app.use("/mh_fifth", userRouter5th)
+// app.use("/mhwi", userRouterWi)
+// app.use("/mhrs", userRouterRs)
 
 
 app.listen(PORT, () => {

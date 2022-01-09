@@ -10,21 +10,21 @@ const monsters = []
 
 
 router.get('/', async (req, res) => {
-    await bootScraper.scraper("First Generation", monsters, "Velociprey")
-    await bootScraper.scraper("First Generation", monsters, "Velocidrome")
+    await bootScraper.scraper("Fifth_Generation", monsters, "Izuchi")
+    await bootScraper.scraper("Fifth_Generation", monsters, "Jyuratodus")
     formatAndMessenger(monsters, res)
 })
 
 router.get('/smallmonsters', async (req, res) => {
 
-    await bootScraper.scraper("First Generation", monsters, "Velociprey")
+    await bootScraper.scraper("Fifth_Generation", monsters, "Izuchi")
     formatAndMessenger(monsters, res)
 
 })
 
 router.get('/largemonsters', async (req, res) => {
 
-    await bootScraper.scraper("First Generation", monsters, "Velocidrome")
+    await bootScraper.scraper("Fifth_Generation", monsters, "Jyuratodus")
     formatAndMessenger(monsters, res)
     
 })
