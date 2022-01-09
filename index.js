@@ -17,6 +17,8 @@ app.get('/',(req, res) => {
     
 })
 
+const userRouterSearch = require('./routes/search.js')
+
 const userRouter1st = require('./routes/mh_first')
 const userRouter2nd = require('./routes/mh_second')
 const userRouter3rd = require('./routes/mh_third')
@@ -24,7 +26,8 @@ const userRouter4th = require('./routes/mh_fourth')
 const userRouter5th = require('./routes/mh_fifth')
 // const userRouterWi = require('./routes/mhwi')
 // const userRouterRs = require('./routes/mhrs');
-const { redisClient } = require('./redisHandler');
+
+app.use("/search", userRouterSearch)
 
 app.use("/mh_first", userRouter1st)
 app.use("/mh_second", userRouter2nd)
