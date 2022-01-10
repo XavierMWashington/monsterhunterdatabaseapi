@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const bootScraper = require('../jsfiles/bootstrapScraper')
 const { formatAndMessenger } = require('../jsfiles/pingAndFormat')
-//const { fork } = require('child_process')
+const { searchScraper } = require('../jsfiles/searchScraper')
 
 const monsters = []
 
@@ -28,6 +28,13 @@ router.get('/largemonsters', async (req, res) => {
     formatAndMessenger(monsters, res)
     
 })
+
+router.get("/search/", async (req, res) => {
+    monsterName = req.query.id
+    await searchScraper(monsterName, monsters, ["Third_Generation"])
+    formatAndMessenger(monsters, res)
+})
+
 
 module.exports = router
 

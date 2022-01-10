@@ -1,6 +1,6 @@
 const axios = require('axios') //allows for immediate html interaction
 const cheerio = require('cheerio') //allows for webscraping
-const generalScraper = require('./generalScrapingFunctions')
+//const generalScraper = require('./generalScrapingFunctions')
 
 const scraper = async function(urlSlug, monsterArray, galleryIndex){
     await axios.get(`https://monsterhunter.fandom.com/wiki/${urlSlug}`)

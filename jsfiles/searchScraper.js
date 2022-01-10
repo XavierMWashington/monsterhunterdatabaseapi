@@ -2,9 +2,9 @@
 
 const axios = require('axios') //allows for immediate html interaction
 const cheerio = require('cheerio') //allows for webscraping
-const generationList = ["First_Generation", "Second_Generation", "Third_Generation", "Fourth_Generation", "Fifth_Generation"]
 
-const searchScraper = async function(target, monsterArray){
+const searchScraper = async function(target, monsterArray, generationList){
+    //monsterArray = []
     let found = false
     let foundName = ""
     target = target.replace(/_/g," ");
@@ -44,10 +44,11 @@ const searchScraper = async function(target, monsterArray){
         .catch((err) => console.log(err))
     ))
 
-        if(found){
-            console.log("Search Successful. " + foundName + " has been located")
-            return foundName
-        }
+    if(found){
+        console.log("Search Successful. " + foundName + " has been located")
+        monsterArray = []
+        return foundName
+    }
     
 }
 
