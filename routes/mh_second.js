@@ -4,34 +4,31 @@ const bootScraper = require('../jsfiles/bootstrapScraper')
 const { searchScraper } = require('../jsfiles/searchScraper')
 
 
-const monsters = []
-
 router.get('/', async (req, res) => {
-    await bootScraper.scraper("Second_Generation", monsters, "Shakalaka")
-    await bootScraper.scraper("Second_Generation", monsters, "Ukanlos")
-    formatAndMessenger(monsters, res)
+    await bootScraper.scraper("Second_Generation", global.fatherMonsterArray, "Shakalaka")
+    await bootScraper.scraper("Second_Generation", global.fatherMonsterArray, "Ukanlos")
+    formatAndMessenger(global.fatherMonsterArray, res)
    
 })
 
 router.get('/smallmonsters', async (req, res) => {
 
-    await bootScraper.scraper("Second_Generation", monsters, "Shakalaka")
-    formatAndMessenger(monsters, res)
+    await bootScraper.scraper("Second_Generation", global.fatherMonsterArray, "Shakalaka")
+    formatAndMessenger(global.fatherMonsterArray, res)
 
 })
 
 router.get('/largemonsters', async (req, res) => {
 
-    await bootScraper.scraper("Second_Generation", monsters, "Ukanlos")
-    formatAndMessenger(monsters, res)
+    await bootScraper.scraper("Second_Generation", global.fatherMonsterArray, "Ukanlos")
+    formatAndMessenger(global.fatherMonsterArray, res)
     
 })
 
 router.get("/search", async (req, res) => {
     const monsterName = req.query.id
-    console.log(monsterName)
-    await searchScraper(monsterName, monsters, ["Second_Generation"])
-    formatAndMessenger(monsters, res)
+    await searchScraper(monsterName, global.fatherMonsterArray, ["Second_Generation"])
+    formatAndMessenger(global.fatherMonsterArray, res)
 })
 
 

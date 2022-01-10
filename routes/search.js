@@ -5,13 +5,11 @@ const { formatAndMessenger } = require('../jsfiles/pingAndFormat')
 const generations = ["First_Generation", "Second_Generation", "Third_Generation", "Fourth_Generation", "Fifth_Generation"]
 
 
-const monsters = []
-
 
 router.get("/", async (req, res) => {
     const monsterName = req.query.id
-    await searchScraper(monsterName, monsters, generations)
-    formatAndMessenger(monsters, res)
+    await searchScraper(monsterName, global.fatherMonsterArray, generations)
+    formatAndMessenger(global.fatherMonsterArray, res)
 })
 
 module.exports = router

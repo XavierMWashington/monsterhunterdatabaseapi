@@ -8,6 +8,7 @@ const app = express()
 global.gatheredNames = []
 global.activated = false
 global.redisLoaded = false
+global.fatherMonsterArray = []
 
 app.set('view engine', 'ejs')
 
