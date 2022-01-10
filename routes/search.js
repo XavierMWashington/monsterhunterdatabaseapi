@@ -9,7 +9,7 @@ const monsters = []
 
 
 router.get("/", async (req, res) => {
-    let monsterName = req.query.id
+    const monsterName = req.query.id
     await searchScraper(monsterName, monsters, generations)
     formatAndMessenger(monsters, res)
 })
