@@ -28,7 +28,7 @@ router.get('/largemonsters', async (req, res) => {
 })
 
 router.get("/search/", async (req, res) => {
-    const monsterName = req.query.id
+    const monsterName = req.query.name
     await searchScraper(monsterName, global.fatherMonsterArray, ["First_Generation"])
     formatAndMessenger(global.fatherMonsterArray, res)
 })

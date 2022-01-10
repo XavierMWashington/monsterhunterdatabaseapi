@@ -7,7 +7,7 @@ const generations = ["First_Generation", "Second_Generation", "Third_Generation"
 
 
 router.get("/", async (req, res) => {
-    const monsterName = req.query.id
+    const monsterName = req.query.name
     await searchScraper(monsterName, global.fatherMonsterArray, generations)
     formatAndMessenger(global.fatherMonsterArray, res)
 })
